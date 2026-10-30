@@ -1,0 +1,15 @@
+services:
+    express:
+        image: pdrbrbs/express-app:latest
+        labels:
+            - "com.centurylinklabs.watchtower.scope=express"
+
+    watchtower:
+        image: nickfedor/watchtower
+        container_name: watchtower
+        environment:
+            -  WATCHTOWER_POLL_INTERVAL=60
+        labels:
+            - "com.centurylinklabs.watchtower.scope=express"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
